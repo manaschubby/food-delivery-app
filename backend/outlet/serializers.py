@@ -14,10 +14,12 @@ class ItemSerializer(serializers.ModelSerializer):
         )
 
 class OutletSerializer(serializers.ModelSerializer):
+    items = ItemSerializer(many=True)
     class Meta:
         model = Outlet
         fields = (
             "id",
             "name",
             "get_absolute_url",
+            "items",
         )
