@@ -8,7 +8,7 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     customerID = models.TextField()
     ready = models.BooleanField(default=False)
-    quantities = models.TextField()
+    quantities = models.TextField(default=dict)
 
     class Meta:
         ordering = ('created',)

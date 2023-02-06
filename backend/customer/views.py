@@ -70,19 +70,14 @@ class create_order(APIView):
             quantities.append(int(quantity))
 
         order = Order(quantities=quantities, customerID=customerID, ready = False)
-        # if len(quantities)==len(item_slugs):
-        #     order["quantities"] = quantities
-        #     order["customerID"] = customerID
-        #     order["ready"] = False
         order.save()
         for item in items:
             order.items.add(item)
-
-        # serializer = OrderSerializer(data=order)
-        # if serializer.is_valid(raise_exception=True):
-        #     serializer.save()
+        order.save()
         
+        serializer = OrderSerializer(order, many=False)
+
         if (len(items)!=0):
-            return Response({"item": userSerializer.data})
+            return Response({"order": serializer.data})
         else:
             return Response({"outtlet": None})
