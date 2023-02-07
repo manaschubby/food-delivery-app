@@ -1,9 +1,11 @@
 from django.db.models import Q
 
+from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+
 
 from .models import Outlet, Item
 from .serializers import OutletSerializer, ItemSerializer
@@ -45,12 +47,22 @@ def outletSearch(request):
     else:
         return Response({"outlets":[]})
     
+
 def process(slugs):
     slugs = slugs.split('"')
     slugs.remove("[")
     slugs.remove(",]")
     slugs.remove(",")
     return slugs
+
+class delete_all(APIView):
+    def get(self, request, format=None):
+        orders = Order.objects.all()
+        for order in orders:
+            order.delete()
+        return Response(status=status.HTTP_200_OK)
+
+
 class create_order(APIView):
     permission_classes=[IsAuthenticated]
     def post(self, request, format=None):
@@ -63,13 +75,17 @@ class create_order(APIView):
         quantity_slugs = process(quantity_slugs)
         outlet = Outlet.objects.get(slug__icontains=outlet_slug)
         items=[]
+
+
         for item in item_slugs:
             items.append(Item.objects.get(Q(outlet=outlet) & Q(slug__icontains=item)))
         quantities = []
         for quantity in quantity_slugs:
             quantities.append(int(quantity))
 
-        order = Order(quantities=quantities, customerID=customerID, ready = False)
+        outlet = Outlet.objects.get(slug=outlet_slug)
+        
+        order = Order(outlet=outlet, quantities=quantities, customerID=customerID, ready = False)
         order.save()
         for item in items:
             order.items.add(item)
@@ -81,3 +97,13 @@ class create_order(APIView):
             return Response({"order": serializer.data})
         else:
             return Response({"outtlet": None})
+        
+class GetCustomerOrders(APIView):
+    permission_classes=[IsAuthenticated]
+    def get(self, request, format=None):
+        userSerializer = UserProfileSerializer(request.user)
+        customerID = userSerializer.data["email"]
+        orders = Order.objects.filter(customerID=customerID)
+
+        serializer = OrderSerializer(orders, many=True)
+        return Response({"orders":serializer.data})

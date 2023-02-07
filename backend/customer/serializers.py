@@ -21,5 +21,6 @@ class OutletSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "get_absolute_url",
+            "outlet",
             "items",
         )

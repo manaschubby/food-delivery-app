@@ -2,8 +2,9 @@ from django.db import models
 from customer.models import Outlet, Item
 # Create your models here.
 
-
 class Order(models.Model):
+    
+    outlet = models.ForeignKey(Outlet, related_name='outlet', on_delete=models.CASCADE)
     items = models.ManyToManyField(Item, related_name='item')
     created = models.DateTimeField(auto_now_add=True)
     customerID = models.TextField()
