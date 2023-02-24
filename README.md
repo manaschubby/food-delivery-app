@@ -32,17 +32,16 @@ Directory Structure:
 
 here are the URL endpoints for the Food Delivery App:
 
-`/` - Home page, displays a list of all restaurants
-`/restaurants/<int:restaurant_id>/` - Restaurant detail page, displays the menu for the specified restaurant
-`/search/` - Search page, allows customers to search for restaurants by name or location
-`/cart/` - Cart page, displays the items in the customer's cart and allows them to place an order
-`/orders/` - Orders page, displays a list of orders placed by the customer
-`/accounts/signup/` - Sign up page for customers and restaurant owners
-`/accounts/login/` - Login page for customers and restaurant owners
-`/accounts/logout/` - Logout page for customers and restaurant owners
-`/restaurants/<int:restaurant_id>/menu/add/` - Add item page for restaurant owners, allows them to add items to their menu
-`/restaurants/<int:restaurant_id>/menu/<int:item_id>/update/` - Update item page for restaurant owners, allows them to update items on their menu
-`/restaurants/<int:restaurant_id>/menu/<int:item_id>/delete/` - Delete item page for restaurant owners, allows them to delete items from their menu
-`/restaurants/<int:restaurant_id>/orders/` - Restaurant orders page, allows restaurant owners to view and manage orders placed by customers.
+1. `/` - Home page, displays a list of all restaurants
+2. `/restaurants/<int:restaurant_id>/` - Restaurant detail page, displays the menu for the specified restaurant
+3. `/search/` - Search page, allows customers to search for restaurants by name or location
+4. `/cart/` - Cart page, displays the items in the customer's cart and allows them to place an order
+5. `/orders/` - Orders page, displays a list of orders placed by the customer
+6. `/accounts/signup/` - Sign up page for customers and restaurant owners
+7. `/accounts/login/` - Login page for customers and restaurant owners
+8. `/restaurants/<int:restaurant_id>/menu/add/` - Add item page for restaurant owners, allows them to add items to their menu
+9. `/restaurants/<int:restaurant_id>/menu/<int:item_id>/update/` - Update item page for restaurant owners, allows them to update items on their menu
+10. `/restaurants/<int:restaurant_id>/menu/<int:item_id>/delete/` - Delete item page for restaurant owners, allows them to delete items from their menu
+11. `/restaurants/<int:restaurant_id>/orders/` - Restaurant orders page, allows restaurant owners to view and manage orders placed by customers.
 
  ### THIS API WAS CREATED AS AN ASSIGNMENT FOR SMARTCAMPUS BPHC INDUCTIONS
